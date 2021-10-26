@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 @Configuration
 @Import({
         MongoConfiguration.class,
+        ServiceConfiguration.class,
         WebConfiguration.class
 })
 @RequiredArgsConstructor

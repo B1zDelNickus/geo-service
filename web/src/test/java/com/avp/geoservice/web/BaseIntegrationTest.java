@@ -1,17 +1,13 @@
 package com.avp.geoservice.web;
 
-import com.avp.geoservice.config.MainConfiguration;
 import com.avp.geoservice.config.ServiceConfiguration;
 import com.avp.geoservice.config.WebConfiguration;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -31,6 +27,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @SpringBootTest(
         classes = {
                 WebConfiguration.class,
+                ServiceConfiguration.class,
                 BaseIntegrationTest.MongoConfig.class
         },
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT

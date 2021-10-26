@@ -8,4 +8,6 @@ public interface FindLocationService {
 
     List<Feature> findByCoords(Double xMin, Double xMax, Double yMin, Double yMax);
 
+    List<Feature> findByPoint(Double lat, Double lng);
+
 }

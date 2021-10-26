@@ -1,21 +1,17 @@
 package com.avp.geoservice.web;
 
 import com.avp.geoservice.model.Feature;
-import com.avp.geoservice.model.GeoPlaceData;
 import com.avp.geoservice.repository.mongo.FeatureRepository;
-import com.github.cloudyrock.mongock.driver.mongodb.springdata.v3.decorator.impl.MongockTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.Point;
-import org.springframework.data.geo.Polygon;
 import org.springframework.data.mongodb.core.geo.GeoJsonPolygon;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

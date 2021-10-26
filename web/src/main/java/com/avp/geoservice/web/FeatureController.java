@@ -13,11 +13,11 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("api")
+@RequiredArgsConstructor
 public class FeatureController {
 
-    private FindLocationService findLocationService;
+    private final FindLocationService findLocationService;
 
     @GetMapping("search/data")
     public List<Feature> searchData(
