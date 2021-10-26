@@ -8,7 +8,7 @@
         <groupId>com.avp</groupId>
         <artifactId>geo-service-app</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>geo-service-web</artifactId>

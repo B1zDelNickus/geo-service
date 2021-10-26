@@ -1,7 +1,7 @@
 package com.avp.geoservice.service;
 
 import com.avp.geoservice.model.Feature;
-import com.avp.geoservice.repository.service.FeatureRepository;
+import com.avp.geoservice.service.find.FindFeatureService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,14 +10,14 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class FindLocationServiceImpl implements FindLocationService {
+public class FeatureServiceImpl implements FeatureService {
 
-    private final FeatureRepository locationRepository;
+    private final FindFeatureService findFeatureService;
 
     @Override
     @Transactional(readOnly = true)
     public List<Feature> findByCoords(Double xMin, Double xMax, Double yMin, Double yMax) {
-        return locationRepository.findAllByGeometryWithin(xMin, xMax, yMin, yMax);
+        return findFeatureService.findAllByGeometryWithin(xMin, xMax, yMin, yMax);
     }
 
 }

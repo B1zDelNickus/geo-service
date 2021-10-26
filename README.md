@@ -7,22 +7,14 @@
 4. [Tryout API for feo service](#api)
 
 ## <a name="task"></a> 1. Task description
-- [task](./Evaluation Assignment-BackEnd-Java.pdf "go to PDF task file")
+- [task](Evaluation Assignment-BackEnd-Java.pdf "go to PDF task file")
 
-## <a name="compose"></a> 2. ENV run instruction
-- `docker-compose -f docker-compose.mongo.yml down`
-- `make init-mongo`
-- `docker-compose -f docker-compose.mongo.yml up -d`
+## <a name="compose"></a> 2. ENV set instruction
+- `./set_env.sh` - to fill test data to working environment
 
-## <a name="data"></a> 3. Prepare test data
-- `sudo apt install -y mongo-tools`
-- `sudo apt install -y jq`
-- `jq --compact-output ".features" ./data/nuts_rg_60m_2013_lvl_1.geojson > ./data/nuts_rg_60m_2013_lvl_1_ready.geojson`
-- `jq --compact-output ".features" ./data/nuts_rg_60m_2013_lvl_2.geojson > ./data/nuts_rg_60m_2013_lvl_2_ready.geojson`
-- `jq --compact-output ".features" ./data/nuts_rg_60m_2013_lvl_3.geojson > ./data/nuts_rg_60m_2013_lvl_3_ready.geojson`
-- `mongoimport --db testdb -c feature --file ./data/nuts_rg_60m_2013_lvl_1_ready.geojson --jsonArray`
-- `mongoimport --db testdb -c feature --file ./data/nuts_rg_60m_2013_lvl_2_ready.geojson --jsonArray`
-- `mongoimport --db testdb -c feature --file ./data/nuts_rg_60m_2013_lvl_3_ready.geojson --jsonArray`
+## <a name="data"></a> 3. Test application
+- `./run_stack.sh` - to run docker and application
+- `./shutdown_stack.sh` - to shut down docker and application
 
 ## <a name="api"></a> 4. Tryout API for feo service
 - `curl http://localhost:8071/api/search/data?yMin=?&yMax=?&xMin=?&xMax=?`

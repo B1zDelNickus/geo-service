@@ -1,4 +1,4 @@
-package com.avp.geoservice.repository.service;
+package com.avp.geoservice.service.find;
 
 import com.avp.geoservice.model.Feature;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class FeatureRepository {
+public class FindFeatureServiceImpl implements FindFeatureService {
 
     private final MongoTemplate template;
 

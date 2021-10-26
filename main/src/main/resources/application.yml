@@ -14,7 +14,8 @@ spring:
       database: testdb
       host: localhost
       port: 27017
-      authentication-database: test
+      username: user
+      password: pass
 
 mongock:
   change-logs-scan-package:

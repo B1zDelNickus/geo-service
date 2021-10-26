@@ -1,7 +1,7 @@
 package com.avp.geoservice.web;
 
 import com.avp.geoservice.model.Feature;
-import com.avp.geoservice.service.FindLocationService;
+import com.avp.geoservice.service.FeatureService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FeatureController {
 
-    private final FindLocationService findLocationService;
+    private final FeatureService findLocationService;
 
     @GetMapping("search/data")
     public List<Feature> searchData(

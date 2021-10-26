@@ -9,10 +9,9 @@ services:
       MONGO_INITDB_ROOT_USERNAME: test
       MONGO_INITDB_ROOT_PASSWORD: test
       MONGO_INITDB_DATABASE: testdb
-      MONGO_REPLICA_SET_NAME: rs0
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
-      - ./config/mongo/init-replicaset.js:/tmp/init-replicaset.js
       - ./mongo-dumps:/var/mongo-dumps
-    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
+      - "$PWD/config/mongo/:/docker-entrypoint-initdb.d/"
+    command: mongod
