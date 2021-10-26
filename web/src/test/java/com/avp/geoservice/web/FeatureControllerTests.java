@@ -1,26 +1,34 @@
 package com.avp.geoservice.web;
 
 import com.avp.geoservice.model.Feature;
-import com.avp.geoservice.repository.mongo.FeatureRepository;
+import com.avp.geoservice.repository.mongo.FeatureMongoRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.geo.GeoJsonPolygon;
+import org.springframework.http.HttpMethod;
 
 import java.net.URI;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Slf4j
 @GeoServiceTest
 public class FeatureControllerTests extends BaseIntegrationTest {
 
     @Autowired
-    private FeatureRepository locationRepository;
+    private FeatureMongoRepository repository;
 
     private final Feature f1 = Feature
             .builder()
@@ -31,7 +39,8 @@ public class FeatureControllerTests extends BaseIntegrationTest {
                             new Point(0, 5),
                             new Point(5, 5),
                             new Point(5, 0),
-                            new Point(0, 0)
+                            new Point(0, 0),
+                            new Point(0, 5)
                     )
             )
             .build();
@@ -45,20 +54,21 @@ public class FeatureControllerTests extends BaseIntegrationTest {
                             new Point(10, 11),
                             new Point(11, 11),
                             new Point(11, 10),
-                            new Point(10, 10)
+                            new Point(10, 10),
+                            new Point(10, 11)
                     )
             )
             .build();
 
     @BeforeEach
     public void setup() {
-        locationRepository.save(f1);
-        locationRepository.save(f2);
+        repository.save(f1);
+        repository.save(f2);
     }
 
     @AfterEach
     public void clean() {
-        locationRepository.deleteAll();
+        repository.deleteAll();
     }
 
     @Test
@@ -72,19 +82,15 @@ public class FeatureControllerTests extends BaseIntegrationTest {
         final String params = String.format("yMin=%s&yMax=%s&xMin=%s&xMax=%s", yMin, yMax, xMin, xMax);
 
         final String baseUrl = getEndpointUrl("/api/search/data?" + params);
-        final URI uri = new URI(baseUrl);
 
         log.debug("Request path: {}", baseUrl);
 
-        List<Feature> result = (List<Feature>) restTemplate.getForObject(uri, List.class);
-
-        assertThat(result.size()).isEqualTo(1);
-
-        Feature feature = result.get(0);
-
-        assertThat(feature.getId()).isEqualTo(f1.getId());
-        assertThat(feature.getType()).isEqualTo(f1.getType());
-        assertThat(feature.getGeometry()).isEqualTo(f1.getGeometry());
+        this.mockMvc.perform(get(baseUrl))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.*", hasSize(1)))
+                .andExpect(jsonPath("$.[0].id").value("1"))
+                .andExpect(jsonPath("$.[0].type").value("Polygon"));
 
     }
 

@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan(
         basePackages = {
                 "com.avp.geoservice.service",
+                "com.avp.geoservice.repository.service"
         }
 )
 @RequiredArgsConstructor

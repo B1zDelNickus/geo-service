@@ -1,5 +1,7 @@
-package com.avp.geoservice.config;
+package com.avp.geoservice;
 
+import com.avp.geoservice.config.ServiceConfiguration;
+import com.avp.geoservice.config.WebConfiguration;
 import com.avp.geoservice.model.Feature;
 import com.avp.geoservice.repository.config.MongoConfiguration;
 import lombok.RequiredArgsConstructor;
