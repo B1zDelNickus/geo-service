@@ -1,4 +1,4 @@
-docker-compose -f docker-compose.mongo.yml start
+docker-compose -f docker-compose.mongo.yml up -d
 sudo apt install -y mongo-tools jq
 echo install deps
 jq --compact-output ".features" ./data/nuts_rg_60m_2013_lvl_1.geojson > ./data/nuts_rg_60m_2013_lvl_1_ready.geojson

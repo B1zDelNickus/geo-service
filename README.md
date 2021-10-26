@@ -17,4 +17,4 @@
 - `./shutdown_stack.sh` - to shut down docker and application
 
 ## <a name="api"></a> 4. Tryout API for feo service
-- `curl http://localhost:8071/api/search/data?yMin=?&yMax=?&xMin=?&xMax=?`
+- `curl http://localhost:8071/api/search/data?yMin=46.9&yMax=47&xMin=15.0&xMax=16`
