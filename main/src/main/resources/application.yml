@@ -1,0 +1,36 @@
+server:
+  port: 8071
+  shutdown: graceful
+
+spring:
+  profiles:
+    active: ${SPRING_PROFILE:dev}
+  lifecycle:
+    timeout-per-shutdown-phase: 60s
+  application:
+    name: geo-service
+  data:
+    mongodb:
+      database: testdb
+      host: localhost
+      port: 27017
+      authentication-database: test
+
+mongock:
+  change-logs-scan-package:
+    - com.avp.geoservice.repository.migrations
+
+logging:
+  file.name: logs/server.log
+  level:
+    root: INFO
+
+info:
+  app:
+    developer: LR
+    java:
+      source: 1.8
+      target: 1.8
+
+date:
+  defaultTimezone: ${TZ:Europe/Paris}
